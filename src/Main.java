@@ -11,6 +11,7 @@ public class Main implements Color {
             int option = Integer.parseInt(input);
             return option;
         } catch (NumberFormatException e) {
+            System.out.println("+" + "~".repeat(117) + "+");
             throw new NumValidatorException( RED + "⚠️ Invalid input. Please enter a valid option number." + RESET);
         }
     }
@@ -52,10 +53,13 @@ public class Main implements Color {
                         exit = true;
                         break;
                     default:
+                        System.out.println("+" + "~".repeat(117) + "+");
                         System.out.println(RED + "⚠️ Invalid input, option must be between 0 and 5." + RESET);
+                        System.out.println("+" + "~".repeat(117) + "+");
                 }
             }catch (NumValidatorException e) {
                 System.out.println(e.getMessage());
+                System.out.println("+" + "~".repeat(117) + "+");
             }
         }
         sc.close();

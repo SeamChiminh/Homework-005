@@ -26,9 +26,11 @@ public class CourseServiceImp implements CourseService , Color {
         String title = "";
         String[] instructors;
         String[] requirements;
+        System.out.println("+" + "~".repeat(117) + "+");
 
         while (true) {
             try {
+
                 System.out.print("[+] Enter Course Title: ");
                 title = sc.nextLine();
                 validateString(title);
@@ -70,7 +72,9 @@ public class CourseServiceImp implements CourseService , Color {
         Course newCourse = new Course(id, title, instructors, requirements, startDate);
         courses.add(newCourse);
 
+        System.out.println("+" + "~".repeat(117) + "+");
         System.out.println(GREEN +"✅ New course added successfully!" + RESET);
+        System.out.println("+" + "~".repeat(117) + "+");
     }
 
     private int generateUniqueId() {
@@ -87,8 +91,13 @@ public class CourseServiceImp implements CourseService , Color {
     @Override
     public void listAllCourses() {
         if (courses.isEmpty()) {
+            System.out.println("+" + "~".repeat(117) + "+");
             System.out.println(RED + "⚠️ No courses available." + RESET);
+            System.out.println("+" + "~".repeat(117) + "+");
         } else {
+            System.out.println("+" + "~".repeat(117) + "+");
+            System.out.println("[+] Display All Data: ");
+            System.out.println("+" + "~".repeat(117) + "+");
             Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
             CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.CENTER);
             table.setColumnWidth(0, 10, 30);
@@ -119,15 +128,20 @@ public class CourseServiceImp implements CourseService , Color {
             int courseId = Integer.parseInt(input);
             return courseId;
         } catch (NumberFormatException e) {
+            System.out.println("+" + "~".repeat(117) + "+");
             throw new NumValidatorException(RED + "⚠️ Invalid input. Please enter a valid course ID." + RESET);
         }
     }
 
     @Override
     public void findCourseById() throws NumValidatorException {
+
+        System.out.println("+" + "~".repeat(117) + "+");
         System.out.print("[+] Enter Course ID to find: ");
         int courseId = validateCourseId(sc.nextLine());
-//        sc.nextLine();
+        System.out.println("+" + "~".repeat(117) + "+");
+
+
         Optional<Course> foundCourse = courses.stream()
                 .filter(course -> course.getId().equals(courseId))
                 .findFirst();
@@ -155,17 +169,24 @@ public class CourseServiceImp implements CourseService , Color {
             table.addCell(course.getStartDate().toString(), cellStyle);
 
             System.out.println("🔎 Course Found:");
+            System.out.println("+" + "~".repeat(117) + "+");
             System.out.println(table.render());
         } else {
+            System.out.println("+" + "~".repeat(117) + "+");
             System.out.println( RED + "⚠️ Not found course with ID " + courseId + RESET);
+            System.out.println("+" + "~".repeat(117) + "+");
         }
     }
 
     @Override
     public void findCourseByTitle() {
         try {
+
+            System.out.println("+" + "~".repeat(117) + "+");
             System.out.print("[+] Enter Course Title to find: ");
             String titleToFind = validateTitle(sc.nextLine());
+            System.out.println("+" + "~".repeat(117) + "+");
+
             titleToFind = titleToFind.trim();
             String titleToFindLower = titleToFind.toLowerCase();
 
@@ -174,7 +195,9 @@ public class CourseServiceImp implements CourseService , Color {
                     .collect(Collectors.toList());
 
             if (!foundCourses.isEmpty()) {
+                System.out.println("+" + "~".repeat(117) + "+");
                 System.out.println("🔎 Courses Found:");
+                System.out.println("+" + "~".repeat(117) + "+");
 
                 Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.ALL);
                 CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.CENTER);
@@ -201,15 +224,19 @@ public class CourseServiceImp implements CourseService , Color {
                 System.out.println(table.render());
 
             } else {
+                System.out.println("+" + "~".repeat(117) + "+");
                 System.out.println( RED + "⚠️ No courses found with the title: " + titleToFind + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
             }
         } catch (StringValidatorException e) {
             System.out.println(e.getMessage());
+            System.out.println("+" + "~".repeat(117) + "+");
         }
     }
 
     private String validateTitle(String input) throws StringValidatorException {
         if (!input.matches("[a-zA-Z\\s]+")) {
+            System.out.println("+" + "~".repeat(117) + "+");
             throw new StringValidatorException(RED + "⚠️ Invalid input. Numbers are not allowed." + RESET);
         }
         return input;
@@ -217,8 +244,10 @@ public class CourseServiceImp implements CourseService , Color {
 
     public void removeCourseById() {
         try {
+            System.out.println("+" + "~".repeat(117) + "+");
             System.out.print("[+] Enter Course ID to remove: ");
             int courseId = validateCourseId(sc.nextLine());
+            System.out.println("+" + "~".repeat(117) + "+");
 
             Optional<Course> foundCourse = courses.stream()
                     .filter(course -> course.getId().equals(courseId))
@@ -226,12 +255,17 @@ public class CourseServiceImp implements CourseService , Color {
 
             if (foundCourse.isPresent()) {
                 courses.remove(foundCourse.get());
-                System.out.println(GREEN + "✅ Course has been removed successfully." + courseId + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
+                System.out.println(GREEN + "✅ Course has been removed successfully." + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
             } else {
+                System.out.println("+" + "~".repeat(117) + "+");
                 System.out.println(RED + "⚠️ Not found course with ID " + courseId + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
             }
         } catch (NumValidatorException e) {
             System.out.println(e.getMessage());
+            System.out.println("+" + "~".repeat(117) + "+");
         }
     }
 
