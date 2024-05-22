@@ -1,41 +1,50 @@
+import exception.NumValidatorException;
 import service.CourseServiceImp;
+import view.Color;
 import view.Menu;
 
 import java.util.Scanner;
 
-public class Main{
+public class Main implements Color {
+    private static int validateOption(String input) throws NumValidatorException {
+        try {
+            int option = Integer.parseInt(input);
+            return option;
+        } catch (NumberFormatException e) {
+            throw new NumValidatorException( RED + "⚠️ Invalid input. Please enter a valid option number." + RESET);
+        }
+    }
+
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         CourseServiceImp courseServiceImp = new CourseServiceImp();
         boolean exit = false;
 
-
         while (!exit)
         {
             Menu.displayMenu();
             System.out.print("[+] Insert option: ");
-            Integer option = sc.nextInt();
-
             try{
+                Integer option = validateOption(sc.nextLine());
                 switch (option) {
                     case 1:
-                        System.out.println("1. add new course");
+
                         courseServiceImp.addNewCourse();
                         break;
                     case 2:
-                        System.out.println("2. list all course");
+
                         courseServiceImp.listAllCourses();
                         break;
                     case 3:
-                        System.out.println("3. find course by id");
+
                         courseServiceImp.findCourseById();
                         break;
                     case 4:
-                        System.out.println("4. find course by title");
+
                         courseServiceImp.findCourseByTitle();
                         break;
                     case 5:
-                        System.out.println("5. remove course by id");
+
                         courseServiceImp.removeCourseById();
                         break;
                     case 0,99:
@@ -43,14 +52,12 @@ public class Main{
                         exit = true;
                         break;
                     default:
-                        System.out.println("Invalid input");
+                        System.out.println(RED + "⚠️ Invalid input, option must be between 0 and 5." + RESET);
                 }
-            }catch (Exception e)
-            {
+            }catch (NumValidatorException e) {
                 System.out.println(e.getMessage());
             }
         }
-
         sc.close();
     }
 }
