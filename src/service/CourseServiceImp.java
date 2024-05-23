@@ -125,6 +125,14 @@ public class CourseServiceImp implements CourseService, Color {
 
     @Override
     public void findCourseById() throws NumValidatorException {
+
+        if (CourseRepository.getAllCourses().isEmpty()) {
+            System.out.println("+" + "~".repeat(117) + "+");
+            System.out.println(RED + "⚠️ No courses available to search." + RESET);
+            System.out.println("+" + "~".repeat(117) + "+");
+            return;
+        }
+
         System.out.println("+" + "~".repeat(117) + "+");
         System.out.print("[+] Enter Course ID to find: ");
         int courseId = validateCourseId(sc.nextLine());
@@ -164,9 +172,17 @@ public class CourseServiceImp implements CourseService, Color {
         }
     }
 
-    @Override
+   @Override
     public void findCourseByTitle() {
         try {
+
+            if (CourseRepository.getAllCourses().isEmpty()) {
+                System.out.println("+" + "~".repeat(117) + "+");
+                System.out.println(RED + "⚠️ No courses available to search." + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
+                return;
+            }
+
             System.out.println("+" + "~".repeat(117) + "+");
             System.out.print("[+] Enter Course Title to find: ");
             String titleToFind = validateTitle(sc.nextLine());
@@ -213,6 +229,7 @@ public class CourseServiceImp implements CourseService, Color {
         }
     }
 
+
     private String validateTitle(String input) throws StringValidatorException {
         if (!input.matches("[a-zA-Z\\s]+")) {
             System.out.println("+" + "~".repeat(117) + "+");
@@ -221,32 +238,16 @@ public class CourseServiceImp implements CourseService, Color {
         return input;
     }
 
-   /* public void removeCourseById() {
-        try {
-            System.out.println("+" + "~".repeat(117) + "+");
-            System.out.print("[+] Enter Course ID to remove: ");
-            int courseId = validateCourseId(sc.nextLine());
-            System.out.println("+" + "~".repeat(117) + "+");
-
-            CourseRepository.removeCourseById(courseId);
-            System.out.println("+" + "~".repeat(117) + "+");
-            System.out.println(GREEN + "✅ Course has been removed successfully." + RESET);
-            System.out.println("+" + "~".repeat(117) + "+");
-        } catch (NumValidatorException e) {
-            System.out.println(e.getMessage());
-            System.out.println("+" + "~".repeat(117) + "+");
-        } catch (CourseNotFoundException e) {
-            System.out.println("+" + "~".repeat(117) + "+");
-            System.out.println(RED + "⚠️ " + e.getMessage() + RESET);
-            System.out.println("+" + "~".repeat(117) + "+");
-        }
-    }
-}
-
-    */
-
     public void removeCourseById() {
         try {
+
+            if (CourseRepository.getAllCourses().isEmpty()) {
+                System.out.println("+" + "~".repeat(117) + "+");
+                System.out.println(RED + "⚠️ No courses available to delete." + RESET);
+                System.out.println("+" + "~".repeat(117) + "+");
+                return;
+            }
+
             System.out.println("+" + "~".repeat(117) + "+");
             System.out.print("[+] Enter Course ID to remove: ");
             int courseId = validateCourseId(sc.nextLine());
@@ -307,5 +308,6 @@ public class CourseServiceImp implements CourseService, Color {
             System.out.println("+" + "~".repeat(117) + "+");
         }
     }
+
 
 }
