@@ -49,7 +49,9 @@ public class Main implements Color {
                         courseServiceImp.removeCourseById();
                         break;
                     case 0,99:
+                        System.out.println("+" + "~".repeat(117) + "+");
                         System.out.println("Exit program...");
+                        System.out.println("+" + "~".repeat(117) + "+");
                         exit = true;
                         break;
                     default:
