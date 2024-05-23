@@ -1,8 +1,6 @@
 package repository;
-
 import exception.CourseNotFoundException;
 import model.Course;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +16,7 @@ public class CourseRepository {
     }
 
     public static List<Course> getAllCourses() {
-        return new ArrayList<>(courses); // Return a copy to prevent modification from outside
+        return new ArrayList<>(courses);
     }
 
     public static Optional<Course> getCourseById(int id) {

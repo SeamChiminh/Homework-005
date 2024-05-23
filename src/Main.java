@@ -29,23 +29,18 @@ public class Main implements Color {
                 Integer option = validateOption(sc.nextLine());
                 switch (option) {
                     case 1:
-
                         courseServiceImp.addNewCourse();
                         break;
                     case 2:
-
                         courseServiceImp.listAllCourses();
                         break;
                     case 3:
-
                         courseServiceImp.findCourseById();
                         break;
                     case 4:
-
                         courseServiceImp.findCourseByTitle();
                         break;
                     case 5:
-
                         courseServiceImp.removeCourseById();
                         break;
                     case 0,99:
